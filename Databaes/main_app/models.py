@@ -10,7 +10,7 @@ class Dog(models.Model):
     # size = models.CharField(max_length=100)
     age = models.IntegerField()
     # gender = models.CharField(max_length=100)
-    shots_recieved = models.TextField(max_length=500)
+    shots_received = models.TextField(max_length=500)
     description = models.TextField(max_length=500)
     fixed = models.BooleanField()
 

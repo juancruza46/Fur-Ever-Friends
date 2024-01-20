@@ -83,7 +83,7 @@ DATABASES = {
         'HOST': 'ep-sparkling-sound-a5x57qbe.us-east-2.aws.neon.tech',
         'PORT': '5432',
     }
-    }
+}
 
 
 # Password validation
