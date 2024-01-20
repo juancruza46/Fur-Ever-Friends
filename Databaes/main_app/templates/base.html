@@ -4,15 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Furr-Ever-Friends</title>
+    <title>Fur-Ever-Friends</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        .bold-text {
+            font-weight: bold;
+            font-size: medium;
+        }
+        .bold-text2 {
+            font-size: xx-large;
+            font-weight: bolder;
+        }
+        .font-color {
+            color: blue;
+            font-weight: bold;
+            font-size: medium;
+        }
+    </style>
 </head>
 <body>
-    {% block content %}
-        
-        
-    {% endblock %}
+    <header class="navbar-fixed">
+        <nav class="navbar grey">
+            <div class="nav-wrapper">
+                <ul class="left">
+                    <li><a href="/" class="bold-text2">&nbsp;&nbsp;Home 🐶&nbsp;&nbsp;</a></li>
+                    <li><a href="" class="font-color">Sign Up</a></li>
+                    <li><a href="" class="font-color">Log In</a></li>
+                </ul>
+                <ul class="right">
+                    <li><a href=""class="bold-text">My &#10084;&#65039; Pet Watch</a></li>
+                    <li><a href=""class="bold-text">Add A Pet</a></li>
+                    <li><a href="/dogs/"class="bold-text">View Pets</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
 </body>
 </html>
