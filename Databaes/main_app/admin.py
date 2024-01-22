@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Pet, Appointment
+from .models import Pet, Appointment, Photo
 
 class AppointmentAdmin(admin.ModelAdmin):
     list_display = ('pet', 'date', 'time')
@@ -8,3 +8,4 @@ class AppointmentAdmin(admin.ModelAdmin):
 
 admin.site.register(Pet)
 admin.site.register(Appointment, AppointmentAdmin)
+admin.site.register(Photo)
