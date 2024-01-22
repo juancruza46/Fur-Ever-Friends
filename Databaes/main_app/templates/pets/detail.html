@@ -18,7 +18,11 @@
         <a href="{% url 'pets_update' pet.id %}">Edit</a>
         <a href="{% url 'pets_delete' pet.id %}">Delete</a>
     </div>
-
 </div>
+{% for photo in pet.photo_set.all %}
+    <img class="responsive-img card-panel" src="{{photo.url}}" alt="Cat Photo">
+{% empty %}
+    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+{% endfor %}
 
 {% endblock %}
