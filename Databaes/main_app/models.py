@@ -5,9 +5,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-class Dog(models.Model):
+class Pet(models.Model):
     name = models.CharField(max_length=100)
-    breed = models.CharField(max_length=100)
+    species = models.CharField(max_length=100)
     # size = models.CharField(max_length=100)
     age = models.IntegerField()
     # gender = models.CharField(max_length=100)
@@ -23,4 +23,4 @@ class Dog(models.Model):
         return self.name
     
     # def get_absolute_url(self):
-    #     return reverse('detail', kwargs={'dog_id': self.id})
+    #     return reverse('detail', kwargs={'pet_id': self.id})
