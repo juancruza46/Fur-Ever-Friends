@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Create a Pet</h1>
+  <form method="POST" action="">
+    {% csrf_token %}
+    {{ form.name.label_tag }} {{ form.name }}
+    {{ form.species.label_tag }} {{ form.species }}
+    {{ form.age.label_tag }} {{ form.age }}
+    {{ form.shots_received.label_tag }} {{ form.shots_received }}
+    {{ form.description.label_tag }} {{ form.description }}
+    {{ form.fixed.label_tag }} {{ form.fixed }} 
+    <br> <br>
+    <button type="submit">Create Pet</button>
+  </form>
+{% endblock %}

@@ -49,13 +49,13 @@
                     </ul>
                     <ul class="right">
                         <li><a href=""class="bold-text">My &#10084;&#65039; Pet Watch</a></li>
-                        <li><a href="" class="bold-text">Add A Pet</a></li>
+                        <li><a href="{% url 'pets_create' %}" class="bold-text">Add A Pet</a></li>
                         <li><a href="{% url 'index' %}" class="bold-text">View Pets</a></li>
                     </ul>
                 {% else %}
                     <ul class="left">
                         <li><a href="{% url 'home' %}" class="bold-text2">&nbsp;&nbsp;Home 🐶&nbsp;&nbsp;</a></li>
-                        <li><a href="{% url 'signup' %}" class="font-color2">Sign Up</a></li>
+                        <li><a href="" class="font-color2">Sign Up</a></li>
                         <li><a href="{% url 'login' %}" class="font-color2">Log In</a></li>
                     </ul>
                     <ul class="right">

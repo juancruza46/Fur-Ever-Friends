@@ -1,10 +1,13 @@
 from django.shortcuts import redirect, render
 
+
+
 # Add the two imports below
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-
+from django.views.generic.edit import CreateView
 from .models import Pet
+
 
 #dummy data
 # pets = [
@@ -29,6 +32,17 @@ def pets_index(request):
 def pets_detail(request, pet_id):
     pet = Pet.objects.get(id=pet_id)
     return render(request, 'pets/detail.html', { 'pet': pet })
+
+class PetCreate(CreateView):
+    model = Pet
+    fields = ['name', 'species', 'age', 'shots_received', 'description', 'fixed']
+    success_url = '/pets/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    #template_name = 'pets/pet_form.html'
+
 
 # def signup(request):
 #     error_message = ''
