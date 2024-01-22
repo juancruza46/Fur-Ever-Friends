@@ -76,6 +76,18 @@ def schedule_appointment(request, pet_id):
 
     return render(request, 'pets/detail.html', {'form': form, 'pet': pet})
 
+def delete_appointment(request, pet_id, appointment_id):
+    # Retrieve the appointment
+    appointment = get_object_or_404(Appointment, id=appointment_id)
+
+    # Check if the user has permission to delete the appointment (optional)
+    if request.user == appointment.pet.user:
+        # Delete the appointment
+        appointment.delete()
+
+    # Redirect back to the pet detail page
+    return redirect('detail', pet_id=pet_id)
+
 
 
 
