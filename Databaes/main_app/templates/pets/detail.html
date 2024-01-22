@@ -26,7 +26,14 @@
         <h2>Existing Appointments</h2>
         <ul>
             {% for appointment in appointments %}
-                <li>{{ appointment.date }} at {{ appointment.time }}</li>
+                <li>
+                    {{ appointment.date }} at {{ appointment.time }}
+                    <form method="post" action="{% url 'delete_appointment' pet.id appointment.id %}">
+                        {% csrf_token %}
+                        <br>
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
             {% endfor %}
         </ul>
     {% endif %}
