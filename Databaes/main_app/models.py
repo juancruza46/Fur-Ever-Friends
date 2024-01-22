@@ -1,5 +1,6 @@
 from django.db import models
 # from django.urls import reverse
+from django.urls import reverse
 
 # Import the User
 from django.contrib.auth.models import User
@@ -13,7 +14,7 @@ class Pet(models.Model):
     # gender = models.CharField(max_length=100)
     shots_received = models.TextField(max_length=500)
     description = models.TextField(max_length=500)
-    fixed = models.BooleanField()
+    fixed = models.BooleanField(default=False)
 
     # Add the foreign key linking to a user
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -22,5 +23,5 @@ class Pet(models.Model):
     def __str__(self):
         return self.name
     
-    # def get_absolute_url(self):
-    #     return reverse('detail', kwargs={'pet_id': self.id})
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'pet_id': self.id})
