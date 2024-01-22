@@ -19,6 +19,27 @@
         <a href="{% url 'pets_delete' pet.id %}">Delete</a>
     </div>
 </div>
+
+<!-- Existing Appts -->
+{% if user.is_authenticated %}
+    {% if appointments %}
+        <h2>Existing Appointments</h2>
+        <ul>
+            {% for appointment in appointments %}
+                <li>{{ appointment.date }} at {{ appointment.time }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- New Appt Form -->
+    <h2>Schedule Appointment</h2>
+    <form method="post" action="{% url 'schedule_appointment' pet.id %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Schedule</button>
+    </form>
+{% endif %}
+
 {% for photo in pet.photo_set.all %}
     <img class="responsive-img card-panel" src="{{photo.url}}" alt="Cat Photo">
 {% empty %}
