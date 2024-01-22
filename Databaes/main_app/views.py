@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+import uuid, boto3, os
 
 
 
@@ -6,7 +7,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Pet
+from .models import Pet, Photo
 
 
 #dummy data
@@ -44,13 +45,28 @@ class PetCreate(CreateView):
     #template_name = 'pets/pet_form.html'
 
 class PetUpdate(UpdateView):
-  model = Pet
-  #exclude what you dont want to be able to edit after creation
-  fields = ['name', 'species', 'age', 'shots_received', 'description', 'fixed']
+    model = Pet
+    #exclude what you dont want to be able to edit after creation
+    fields = ['name', 'species', 'age', 'shots_received', 'description', 'fixed']
 
 class PetDelete(DeleteView):
-  model = Pet
-  success_url = '/pets'
+    model = Pet
+    success_url = '/pets'
+
+def add_photo(request, pet_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            bucket = os.environ['S3_BUCKET']
+            s3.upload_fileobj(photo_file, bucket, key)
+            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+            Photo.objects.create(url=url, pet_id=pet_id)
+        except Exception as e:
+            print('An error occurred uploading file to S3')
+            print(e)
+    return redirect('detail', pet_id=pet_id)
 
 
 # def signup(request):
