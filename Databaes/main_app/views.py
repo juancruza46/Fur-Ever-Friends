@@ -4,13 +4,13 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import Dog
+from .models import Pet
 
 #dummy data
-# dogs = [
-#     {'name': 'Snoopy', 'species': 'Dog', 'size': 'Small', 'age': 2, 'gender': 'M'},
-#     {'name': 'Doggo', 'specees': 'Dog', 'size': 'Large', 'age': 10, 'gender': 'F'},
-#     {'name': 'Ash', 'species': 'Dog', 'size': 'Medium', 'age': 5, 'gender': 'F'},
+# pets = [
+#     {'name': 'Snoopy', 'species': 'Pet', 'size': 'Small', 'age': 2, 'gender': 'M'},
+#     {'name': 'go', 'specees': 'Pet', 'size': 'Large', 'age': 10, 'gender': 'F'},
+#     {'name': 'Ash', 'species': 'Pet', 'size': 'Medium', 'age': 5, 'gender': 'F'},
 # ]
 
 # Define the home view
@@ -21,14 +21,14 @@ def about(request):
     # Include an .html file extension - unlike when rendering EJS templates
     return render(request, 'about.html')
 
-#define dogs index view
-def dogs_index(request):
-    dogs = Dog.objects.all()
-    return render (request, 'dogs/index.html', {'dogs': dogs})
+#define pets index view
+def pets_index(request):
+    pets = Pet.objects.all()
+    return render (request, 'pets/index.html', {'pets': pets})
 
-def dogs_detail(request, dog_id):
-    dog = Dog.objects.get(id=dog_id)
-    return render(request, 'dogs/detail.html', { 'dog': dog })
+def pets_detail(request, pet_id):
+    pet = Pet.objects.get(id=pet_id)
+    return render(request, 'pets/detail.html', { 'pet': pet })
 
 # def signup(request):
 #     error_message = ''

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h1>Pet List</h1>
+
+{% for pet in pets %}
+  <div class="card">
+    <a href="/pets/{{pet.id}}">
+      <div class="card-content"></div>
+        <span class="card-title">{{ pet.name }}</span>
+          <p>Species: {{ pet.species }}</p>
+          {% if pet.age > 0 %}
+            <p>Age: {{ pet.age }}</p>
+          {% else %}
+            <p>Age: Baby</p>
+          {% endif %}
+          <p>Shots Received: {{ pet.shots_received }}</p>
+          <p>Descriptions: {{ pet.description }}</p>
+          <p>Fixed?: {{ pet.fixed }}</p>
+      </div>
+    </a>
+  </div>
+{% endfor %}
+
+{% endblock %}
+
