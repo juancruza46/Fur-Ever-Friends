@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 # Add the two imports below
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Pet
 
 
@@ -42,6 +42,15 @@ class PetCreate(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
     #template_name = 'pets/pet_form.html'
+
+class PetUpdate(UpdateView):
+  model = Pet
+  #exclude what you dont want to be able to edit after creation
+  fields = ['name', 'species', 'age', 'shots_received', 'description', 'fixed']
+
+class PetDelete(DeleteView):
+  model = Pet
+  success_url = '/pets'
 
 
 # def signup(request):
