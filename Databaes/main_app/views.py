@@ -1,38 +1,28 @@
-from django.shortcuts import redirect, render
-import uuid, boto3, os
-
-
-
-# Add the two imports below
-from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import redirect, render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Pet, Photo
+from django.contrib.auth.forms import UserCreationForm
+from .models import Pet, Photo, Appointment
+from .forms import AppointmentForm
+import uuid
+import boto3
+import os
 
-
-#dummy data
-# pets = [
-#     {'name': 'Snoopy', 'species': 'Pet', 'size': 'Small', 'age': 2, 'gender': 'M'},
-#     {'name': 'go', 'specees': 'Pet', 'size': 'Large', 'age': 10, 'gender': 'F'},
-#     {'name': 'Ash', 'species': 'Pet', 'size': 'Medium', 'age': 5, 'gender': 'F'},
-# ]
-
-# Define the home view
 def home(request):
-    # Include an .html file extension - unlike when rendering EJS templates
     return render(request, 'home.html')
+
 def about(request):
-    # Include an .html file extension - unlike when rendering EJS templates
     return render(request, 'about.html')
 
-#define pets index view
 def pets_index(request):
     pets = Pet.objects.all()
-    return render (request, 'pets/index.html', {'pets': pets})
+    return render(request, 'pets/index.html', {'pets': pets})
 
 def pets_detail(request, pet_id):
-    pet = Pet.objects.get(id=pet_id)
-    return render(request, 'pets/detail.html', { 'pet': pet })
+    pet = get_object_or_404(Pet, id=pet_id)
+    appointments = pet.appointments.all()  # Get all appointments related to the pet
+
+    return render(request, 'pets/detail.html', {'pet': pet, 'appointments': appointments})
 
 class PetCreate(CreateView):
     model = Pet
@@ -42,11 +32,9 @@ class PetCreate(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-    #template_name = 'pets/pet_form.html'
 
 class PetUpdate(UpdateView):
     model = Pet
-    #exclude what you dont want to be able to edit after creation
     fields = ['name', 'species', 'age', 'shots_received', 'description', 'fixed']
 
 class PetDelete(DeleteView):
@@ -56,17 +44,39 @@ class PetDelete(DeleteView):
 def add_photo(request, pet_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
-        s3 = boto3.client('s3')
-        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
-        try:
-            bucket = os.environ['S3_BUCKET']
-            s3.upload_fileobj(photo_file, bucket, key)
-            url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
-            Photo.objects.create(url=url, pet_id=pet_id)
-        except Exception as e:
-            print('An error occurred uploading file to S3')
-            print(e)
+        upload_photo_to_s3(photo_file, pet_id)
     return redirect('detail', pet_id=pet_id)
+
+def upload_photo_to_s3(photo_file, pet_id):
+    s3 = boto3.client('s3')
+    key = f"{uuid.uuid4().hex[:6]}{photo_file.name[photo_file.name.rfind('.'):]}"
+
+    try:
+        bucket = os.environ['S3_BUCKET']
+        s3.upload_fileobj(photo_file, bucket, key)
+        url = f"{os.environ['S3_BASE_URL']}{bucket}/{key}"
+        Photo.objects.create(url=url, pet_id=pet_id)
+    except Exception as e:
+        print('An error occurred uploading file to S3')
+        print(e)
+
+@login_required
+def schedule_appointment(request, pet_id):
+    pet = get_object_or_404(Pet, id=pet_id)
+
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            appointment = form.save(commit=False)
+            appointment.pet = pet
+            appointment.save()
+            return redirect('detail', pet_id=pet_id)
+    else:
+        form = AppointmentForm()
+
+    return render(request, 'pets/detail.html', {'form': form, 'pet': pet})
+
+
 
 
 # def signup(request):
