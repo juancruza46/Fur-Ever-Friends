@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Swiss+721+Rounded:wght@400&display=swap">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         .bold-text {
             color: rgb(66, 96, 60);
@@ -47,15 +48,17 @@
                             </form>
                         </li>
                     </ul>
-                    <ul class="right">
-                        <li><a href=""class="bold-text">My &#10084;&#65039; Pet Watch</a></li>
+                    <!-- Hamburger menu icon on the right -->
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="{% url 'index' %}"class="bold-text">My &#10084;&#65039; Pet Watch</a></li>
                         <li><a href="{% url 'pets_create' %}" class="bold-text">Add A Pet</a></li>
                         <li><a href="{% url 'index' %}" class="bold-text">View Pets</a></li>
                     </ul>
                 {% else %}
                     <ul class="left">
                         <li><a href="{% url 'home' %}" class="bold-text2">&nbsp;&nbsp;Home 🐶&nbsp;&nbsp;</a></li>
-                        <li><a href="" class="font-color2">Sign Up</a></li>
+                        <li><a href="{% url 'signup' %}" class="font-color2">Sign Up</a></li>
                         <li><a href="{% url 'login' %}" class="font-color2">Log In</a></li>
                     </ul>
                     <ul class="right">
@@ -69,5 +72,15 @@
         {% block content %}
         {% endblock %}
     </main>
+    <!-- Include jQuery and Materialize JS -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <!-- Initialize the sidenav -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems);
+        });
+    </script>
 </body>
 </html>

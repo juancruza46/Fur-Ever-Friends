@@ -15,5 +15,5 @@ urlpatterns = [
     path('pets/<int:pet_id>/schedule_appointment/', schedule_appointment, name='schedule_appointment'),
     path('pets/<int:pet_id>/delete_appointment/<int:appointment_id>/', views.delete_appointment, name='delete_appointment'),
     path('pets/<int:pet_id>/add_photo/', views.add_photo, name='add_photo'),
+    path('accounts/signup/', views.signup, name='signup'),
 ]
-    #path('accounts/signup/', views.signup, name='signup'),
