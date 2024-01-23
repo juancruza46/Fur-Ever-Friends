@@ -9,10 +9,12 @@
         <p>Species: {{ pet.species }}</p>
         <p>Description: {{ pet.description|linebreaks }}</p>
         {% if pet.age > 0 %}
-            <p>Age: {{ pet.age }}</p>
+        <p>Age: {{ pet.age }}</p>
         {% else %}
-            <p>Age: Baby</p>
+        <p>Age: Baby</p>
         {% endif %}
+        <p>Size: {{ pet.size }}</p>
+        <p>Fixed?: {{ pet.fixed }}</p>
     </div>
     {% if user.id == pet.user.id %}
     <div class="card-action">
@@ -43,9 +45,9 @@
     <!-- New Appt Form -->
     <h2>Schedule Appointment</h2>
     <form method="post" action="{% url 'schedule_appointment' pet.id %}">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Schedule</button>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Schedule</button>
     </form>
 {% endif %}
 

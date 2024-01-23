@@ -2,15 +2,44 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 
+SIZE_CHOICES = [
+    ('S', 'Small'),
+    ('M', 'Medium'),
+    ('L', 'Large'),
+]
+
+GENDER_CHOICES = [
+    ('M', 'Male'),
+    ('F', 'Female'),
+    ]
+
+FIXED_CHOICES = [
+    ('Y', 'Yes'),
+    ('N', 'No'),
+]
 #-----------------------------------------------------------#
 # Pet Model:
 class Pet(models.Model):
     name = models.CharField(max_length=100)
     species = models.CharField(max_length=100)
     age = models.IntegerField()
+    size = models.CharField(
+        max_length=100, 
+        choices=SIZE_CHOICES, 
+        default=SIZE_CHOICES[0][0],
+    )
+    gender = models.CharField(
+        max_length=100, 
+        choices=GENDER_CHOICES, 
+        default=GENDER_CHOICES[0][0],
+    )
     shots_received = models.TextField(max_length=500)
     description = models.TextField(max_length=500)
-    fixed = models.BooleanField(default=False)
+    fixed = models.CharField(
+        max_length=100, 
+        choices=FIXED_CHOICES, 
+        default=FIXED_CHOICES[0][0],
+    )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):

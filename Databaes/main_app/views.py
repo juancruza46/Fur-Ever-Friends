@@ -27,7 +27,7 @@ def pets_detail(request, pet_id):
 
 class PetCreate(CreateView):
     model = Pet
-    fields = ['name', 'species', 'age', 'shots_received', 'description', 'fixed']
+    fields = ['name', 'species', 'age', 'size', 'gender', 'shots_received', 'description', 'fixed']
     success_url = '/pets'
 
 
@@ -40,7 +40,7 @@ class PetCreate(CreateView):
 
 class PetUpdate(UpdateView):
     model = Pet
-    fields = ['name', 'species', 'age', 'shots_received', 'description', 'fixed']
+    fields = ['name', 'species', 'age', 'size', 'gender', 'shots_received', 'description', 'fixed']
 
 class PetDelete(DeleteView):
     model = Pet
