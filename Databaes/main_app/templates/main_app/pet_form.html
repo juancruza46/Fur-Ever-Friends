@@ -4,13 +4,18 @@
   <h1>Create a Pet</h1>
   <form method="POST" action="">
     {% csrf_token %}
-    {{ form.name.label_tag }} {{ form.name }}
-    {{ form.species.label_tag }} {{ form.species }}
-    {{ form.age.label_tag }} {{ form.age }}
-    {{ form.shots_received.label_tag }} {{ form.shots_received }}
-    {{ form.description.label_tag }} {{ form.description }}
-    {{ form.fixed.label_tag }} {{ form.fixed }} 
+  <table>
+    {{ form.as_table }}
+  </table>
     <br> <br>
     <button type="submit">Create Pet</button>
   </form>
+  <script>
+    const sizeEl = document.getElementById('id_size')
+    const genderEl = document.getElementById('id_gender')
+    const fixedEl = document.getElementById('id_fixed')
+    M.FormSelect.init(sizeEl)
+    M.FormSelect.init(genderEl)
+    M.FormSelect.init(fixedEl)
+  </script>
 {% endblock %}
