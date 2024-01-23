@@ -27,11 +27,15 @@ def pets_detail(request, pet_id):
 class PetCreate(CreateView):
     model = Pet
     fields = ['name', 'species', 'age', 'shots_received', 'description', 'fixed']
-    success_url = '/pets/'
+    success_url = '/pets'
+
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+    # def get_success_url(self):
+    #     return redirect('offerta_create',args=(self.object.id,))
 
 class PetUpdate(UpdateView):
     model = Pet
