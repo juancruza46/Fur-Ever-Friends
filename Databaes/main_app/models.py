@@ -62,6 +62,7 @@ class Appointment(models.Model):
     date = models.DateField('Appointment Date')
     time = models.TimeField('Appointment Time')
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='appointments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Add a user field to associate with the appointment
 
     def __str__(self):
         return f"{self.pet.name}'s Appointment on {self.date} at {self.time}"
