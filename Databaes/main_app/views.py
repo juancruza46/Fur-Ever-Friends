@@ -22,9 +22,12 @@ def pets_index(request):
 
 def pets_detail(request, pet_id):
     pet = get_object_or_404(Pet, id=pet_id)
-    appointments = pet.appointments.all()  # Get all appointments related to the pet
+    appointments = pet.appointments.all().select_related('pet__user')  # Include user information in appointments
+    form = AppointmentForm()  # Include an empty form in the context
 
-    return render(request, 'pets/detail.html', {'pet': pet, 'appointments': appointments})
+    return render(request, 'pets/detail.html', {'pet': pet, 'appointments': appointments, 'form': form})
+
+
 
 class PetCreate(CreateView):
     model = Pet
@@ -77,6 +80,7 @@ def schedule_appointment(request, pet_id):
         if form.is_valid():
             appointment = form.save(commit=False)
             appointment.pet = pet
+            appointment.user = request.user  # Set the user field to the logged-in user
             appointment.save()
             return redirect('detail', pet_id=pet_id)
     else:
@@ -84,16 +88,17 @@ def schedule_appointment(request, pet_id):
 
     return render(request, 'pets/detail.html', {'form': form, 'pet': pet})
 
+
+@login_required
 def delete_appointment(request, pet_id, appointment_id):
     # Retrieve the appointment
     appointment = get_object_or_404(Appointment, id=appointment_id)
 
-    # Check if the user has permission to delete the appointment (optional)
-    if request.user == appointment.pet.user:
+    # Check if the user has permission to delete the appointment
+    if request.user == appointment.user:
         # Delete the appointment
         appointment.delete()
-
-    # Redirect back to the pet detail page
+        
     return redirect('detail', pet_id=pet_id)
 
 
