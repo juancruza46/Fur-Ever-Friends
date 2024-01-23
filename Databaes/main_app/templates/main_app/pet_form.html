@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Create a Pet</h1>
+{% if object %}
+        <h3>Edit {{ object.name }}</h3>
+    {% else %}
+        <h3>Add a Pet</h3>
+    {% endif %}
   <form method="POST" action="">
     {% csrf_token %}
   <table>
     {{ form.as_table }}
   </table>
     <br> <br>
-    <button type="submit">Create Pet</button>
+    <button type="submit">Submit!</button>
   </form>
   <script>
     const sizeEl = document.getElementById('id_size')
