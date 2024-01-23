@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
@@ -28,15 +29,17 @@ def pets_detail(request, pet_id):
 class PetCreate(CreateView):
     model = Pet
     fields = ['name', 'species', 'age', 'size', 'gender', 'shots_received', 'description', 'fixed']
-    success_url = '/pets'
+    # success_url = '/pets'
 
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        result = super().form_valid(form)
+        # print (self.object.id)
+        return result
 
-    # def get_success_url(self):
-    #     return redirect('offerta_create',args=(self.object.id,))
+def get_success_url(self):
+    return reverse('detail')  
 
 class PetUpdate(UpdateView):
     model = Pet
@@ -107,3 +110,6 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+def adopt_pet(request, pet_id):
+    pass
