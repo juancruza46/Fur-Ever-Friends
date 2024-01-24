@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
@@ -22,9 +23,8 @@ def pets_index(request):
 
 def pets_detail(request, pet_id):
     pet = get_object_or_404(Pet, id=pet_id)
-    appointments = pet.appointments.all().select_related('pet__user')  # Include user information in appointments
-    form = AppointmentForm()  # Include an empty form in the context
-    print (pet.photo_set.all)
+    appointments = pet.appointments.all().select_related('pet__user')  
+    form = AppointmentForm()  
 
     return render(request, 'pets/detail.html', {'pet': pet, 'appointments': appointments, 'form': form})
 
@@ -118,4 +118,8 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 def adopt_pet(request, pet_id):
-    pass
+    if request.method == 'POST':
+        pet = Pet.objects.get(id=pet_id)
+        pet.adopted=True
+        pet.save()
+    return redirect('detail', pet_id=pet_id)

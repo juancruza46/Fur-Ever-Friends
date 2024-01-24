@@ -41,6 +41,7 @@ class Pet(models.Model):
         default=FIXED_CHOICES[0][0],
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    adopted = models.BooleanField(default=False)
 
     # def __str__(self):
     #     return self.name
