@@ -16,6 +16,7 @@
         <p>Size: {{ pet.size }}</p>
         <p>Fixed?: {{ pet.fixed }}</p>
         <p>Owner: {{ pet.user }}</p>
+        <p>Adopted: {{ pet.adopted }}</p>
     </div>
     {% if user.is_authenticated %}
         {% if user.id != pet.user.id %}

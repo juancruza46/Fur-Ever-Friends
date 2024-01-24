@@ -2,8 +2,9 @@
 {% block content %}
 
   <h1>Pet List</h1>
-
 {% for pet in pets %}
+  {% if pet.adopted == True %}
+  {% else %}
   <div class="card">
     <div class="card-content"></div>
       <span class="card-title">{{ pet.name }}</span>
@@ -17,7 +18,9 @@
           </a>
     </div>
   </div>
+  {% endif %}
 {% endfor %}
 
 {% endblock %}
 
+<!-- success stories, instead of <3 just flip roles of this page. -->
