@@ -1,25 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if object %}
+  <body style="background-color: rgb(175, 199, 205); margin: 0; padding: 0;">
+    <div style="margin: 40px auto 0; max-width: 800px; padding: 20px; background-color: white; border: 1vmin solid black; border-radius: 8px;">
+      {% if object %}
         <h3>Edit {{ object.name }}</h3>
-    {% else %}
-        <h3>Add a Pet</h3>
-    {% endif %}
-  <form method="POST" action="">
-    {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
-    <br> <br>
-    <button type="submit">Submit!</button>
-  </form>
-  <script>
-    const sizeEl = document.getElementById('id_size')
-    const genderEl = document.getElementById('id_gender')
-    const fixedEl = document.getElementById('id_fixed')
-    M.FormSelect.init(sizeEl)
-    M.FormSelect.init(genderEl)
-    M.FormSelect.init(fixedEl)
-  </script>
+      {% else %}
+        <h4>List a pet for adoption:</h4>
+      {% endif %}
+      
+      <form method="POST" action="">
+        {% csrf_token %}
+        
+        <table style="width: 100%; padding: 10px;">
+          {{ form.as_table|safe }} {# Use |safe to allow HTML rendering for custom styling #}
+        </table>
+        
+        <br>
+        
+        <button type="submit" style="background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; display: block; margin: 0 auto;" id="submitBtn">
+          Submit!
+        </button>
+      </form>
+      
+      <script>
+        const sizeEl = document.getElementById('id_size');
+        const genderEl = document.getElementById('id_gender');
+        const fixedEl = document.getElementById('id_fixed');
+        M.FormSelect.init(sizeEl);
+        M.FormSelect.init(genderEl);
+        M.FormSelect.init(fixedEl);
+      </script>
+    </div>
+  </body>
 {% endblock %}
+
+
+
+

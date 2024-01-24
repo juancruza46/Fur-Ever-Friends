@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
-
 {% block content %}
-  <h1>Delete Pet</h1>
 
-  <h4>Are you sure you want to delete <span class="teal-text">{{ object.name }}</span>?</h4>
+  <body style="background-color: rgb(175, 199, 205); margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center;">
+    <div style="width: 100%; max-width: 800px; margin: 20px auto 0; padding: 20px; background-color: white; border: 1vmin solid black; border-radius: 8px; text-align: center; box-sizing: border-box;">
+      <h1 style="color: #333; margin-bottom: 10px;">Delete Pet</h1>
 
-  <form action="" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Yes - Delete!" class="btn red">
-    <a href="{% url 'detail' pet.id %}">Cancel</a>
-  </form>
+      <h4 style="color: #555; margin-bottom: 20px;">Are you sure you want to delete <span style="color: #00796b;">{{ object.name }}</span>?</h4>
+
+      <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Yes - Delete!" style="background-color: #d32f2f; color: white; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; margin-right: 8px;">
+        <a href="{% url 'detail' pet.id %}" style="color: #00796b; text-decoration: none; padding: 8px 12px; border: 1px solid #00796b; border-radius: 4px;">Cancel</a>
+      </form>
+    </div>
+
+    <img src="https://i.imgur.com/R4lIkYD_d.jpg?maxwidth=800&maxheight=800&shape=thumb&fidelity=high" style="width: 100%; max-width: 800px; height: auto; margin: 20px auto; display: block; border: 1vmin solid black; border-radius: 8px; box-sizing: border-box;">
+  </body>
 {% endblock %}
+
