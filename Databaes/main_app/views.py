@@ -24,6 +24,7 @@ def pets_detail(request, pet_id):
     pet = get_object_or_404(Pet, id=pet_id)
     appointments = pet.appointments.all().select_related('pet__user')  # Include user information in appointments
     form = AppointmentForm()  # Include an empty form in the context
+    print (pet.photo_set.all)
 
     return render(request, 'pets/detail.html', {'pet': pet, 'appointments': appointments, 'form': form})
 
