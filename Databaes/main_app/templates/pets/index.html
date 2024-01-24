@@ -5,20 +5,17 @@
 
 {% for pet in pets %}
   <div class="card">
-    <a href="/pets/{{pet.id}}">
-      <div class="card-content"></div>
-        <span class="card-title">{{ pet.name }}</span>
-          <p>Species: {{ pet.species }}</p>
-          {% if pet.age > 0 %}
-            <p>Age: {{ pet.age }}</p>
-          {% else %}
-            <p>Age: Baby</p>
-          {% endif %}
-          <p>Shots Received: {{ pet.shots_received }}</p>
-          <p>Descriptions: {{ pet.description }}</p>
-          <p>Fixed?: {{ pet.fixed }}</p>
-      </div>
-    </a>
+    <div class="card-content"></div>
+      <span class="card-title">{{ pet.name }}</span>
+      <p class="right">Species: {{ pet.species }} &nbsp;&nbsp;</p>
+      <a href="/pets/{{pet.id}}">
+            {% for photo in pet.photo_set.all %}
+              <img class="responsive-img card-panel" src="{{photo.url}}" alt="Pet Photo">
+            {% empty %}
+              <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+            {% endfor %}
+          </a>
+    </div>
   </div>
 {% endfor %}
 
