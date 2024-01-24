@@ -17,6 +17,9 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+# def favorite(request):
+#     return render(request, 'favorite.html')
+
 def pets_index(request):
     pets = Pet.objects.all()
     return render(request, 'pets/index.html', {'pets': pets})
@@ -28,13 +31,10 @@ def pets_detail(request, pet_id):
 
     return render(request, 'pets/detail.html', {'pet': pet, 'appointments': appointments, 'form': form})
 
-
-
 class PetCreate(CreateView):
     model = Pet
     fields = ['name', 'species', 'age', 'size', 'gender', 'shots_received', 'description', 'fixed']
     # success_url = '/pets'
-
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -102,7 +102,6 @@ def delete_appointment(request, pet_id, appointment_id):
         
     return redirect('detail', pet_id=pet_id)
 
-
 def signup(request):
     error_message = ''
     if request.method == 'POST':
@@ -123,3 +122,10 @@ def adopt_pet(request, pet_id):
         pet.adopted=True
         pet.save()
     return redirect('detail', pet_id=pet_id)
+
+
+# def favorite_pet(request, pet_id):
+#     if request.method == 'POST':
+#         pet = Pet.objects.get(id=pet_id)
+#         pet.save()
+#     return redirect('favorite', pet_id=pet_id)

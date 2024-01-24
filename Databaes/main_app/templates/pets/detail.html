@@ -1,91 +1,183 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<style>
+body {
+    margin: 10;
+    background-color: rgb(175, 199, 205);
+    text-align: center;
+    font-family:'Swiss 721 Rounded', sans-serif;
+}
+.flex-item2 {
+    background-color: grey;
+}
+.cardpanel {
+    color: rgb(66, 96, 60);
+}
+.btn1, .btn {
+    background-color: lightgray;
+    font-weight: bold;
+    align-content: center;
+    color: white;
+}
+h1 {
+    color: rgb(66, 96, 60);
+    font-family:'Swiss 721 Rounded', sans-serif;
+}
+h6{
+    color: grey;
+    font-size: 20 px;
+    font-family:'Swiss 721 Rounded', sans-serif;
+}
+.card {
+    background-color: rgb(127, 172, 110);
+}
+p {
+    color: rgb(66, 96, 60);
+    font-size: 20 px;
+    font-weight: bold;
+    font-family:'Swiss 721 Rounded', sans-serif;
+}
+.value, .description {
+    color: gray;
+    font-size: 20 px;
+    font-family:'Swiss 721 Rounded', sans-serif;
+}
+h3 {
+    font-weight: bolder;
+    font-size: 40 px;
+    color: grey;
+    font-family:'Swiss 721 Rounded', sans-serif;
+}
+</style>
+<body>
 <h1>Pet Details</h1>
-
-<div class="card">
-    <div class="card-content">
-        <span class="card-title">{{ pet.name }}</span>
-        <p>Species: {{ pet.species }}</p>
-        <p>Description: {{ pet.description|linebreaks }}</p>
-        {% if pet.age > 0 %}
-        <p>Age: {{ pet.age }}</p>
-        {% else %}
-        <p>Age: Baby</p>
-        {% endif %}
-        <p>Size: {{ pet.size }}</p>
-        <p>Fixed?: {{ pet.fixed }}</p>
-        <p>Owner: {{ pet.user }}</p>
-        <p>Adopted: {{ pet.adopted }}</p>
-    </div>
-    {% if user.is_authenticated %}
-        {% if user.id != pet.user.id %}
-            <div class="card-action">
-                <form method="post" action="{% url 'adopt_pet' pet.id %}">
-                    {% csrf_token %}
-                    <label>
-                        <input type="checkbox" name="adopt" value="yes">
-                        Interested in Adopting?
-                    </label>
-                    <input type="submit" value="Yes" style="background-color: orange; color: white;">
-                </form>
+<div class="row">
+    <div class="card col s6">
+        <div class="container">
+            <div class="card-content">
+            <h3>{{ pet.name }}</h3>
+                <div class="col s6">
+                    <p>Species: </p>
+                </div>
+                <div class="col s6">
+                    <p class="value">{{ pet.species }}</p>
+                </div>
+                <div class="col s6">    
+                    <p>Description: </p>
+                </div>
+                <div class="col s6">    
+                    <p class="value">{{ pet.description }}</p>
+                </div>
+                <div class="col s6"> 
+                    {% if pet.age > 0 %}
+                        <p>Age: </p>
+                </div>
+                <div class="col s6">    
+                    <p class="value">{{ pet.age }}</p>
+                </div>
+                <div class="col s6">  
+                    {% else %}  
+                        <p>Age: </p>
+                </div>
+                <div class="col s6">    
+                    <p class="value">Baby</p>
+                </div>    
+                    {% endif %}        
+                <div class="col s6">     
+                    <p>Size: </p>
+                </div>
+                <div class="col s6">    
+                    <p class="value">{{ pet.size }}</p>
+                </div>
+                <div class="col s6">  
+                    <p>Fixed?: </p>
+                    <p class="value">{{ pet.fixed }}</p>
+                </div>
+                    <p>Owner: </p><p class="value">{{ pet.user }}</p>
+                    <p>Adopted: </p><p class="value">{{ pet.adopted }}</p>
+                </div>
+            <div class="col s6 card">
+                {% if user.id == pet.user.id %}
+                    <div class="card-action">
+                        <a href="{% url 'pets_update' pet.id %}">Edit</a>
+                        <a href="{% url 'pets_delete' pet.id %}">Delete</a>
+                    </div>
+                {% endif %}
+                <!-- Adopt Pet -->
+                {% if user.is_authenticated %}
+                    {% if user.id != pet.user.id %}
+                        <div class="card-action">
+                            <form method="post" action="{% url 'adopt_pet' pet.id %}">
+                                {% csrf_token %}
+                                <label>
+                                    <input type="checkbox" name="adopt" value="yes">
+                                    Interested in Adopting?
+                                </label>
+                                <input type="submit" value="Yes" style="background-color: lightgrey; color: white;">
+                            </form>
+                        </div>
+                    </div>
+                    {% endif %}
+                        <p>Log In To Adopt A Pet</p>
+                {% endif %}
             </div>
-        {% endif %}
-    {% endif %}
-
-    {% if user.id == pet.user.id %}
-        <div class="card-action">
-            <a href="{% url 'pets_update' pet.id %}">Edit</a>
-            <a href="{% url 'pets_delete' pet.id %}">Delete</a>
         </div>
+    </div>
+</div>
+<div class="col s1"></div>
+<!-- Photo Section -->
+<div class="row">
+    <div class="card col s5">
+        <div class="container">
+            <div class="card-content">
+                {% for photo in pet.photo_set.all %}
+                <img class="responsive-img card-panel" src="{{photo.url}}" alt="Pet Photo">
+                {% empty %}
+                <div class="card-panel" style="background-color:grey; color: white;">No Photos Uploaded</div>
+                {% endfor %}
+                </div>
+            {% if user.id == pet.user.id %}
+                <form action="{% url 'add_photo' pet.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+                    {% csrf_token %}
+                    <input type="file" name="photo-file">
+                    <br><br>
+                    <button type="submit" class="btn">Upload Photo</button>
+                </form>
+            {% else %}
+                <h6>Only the owner of the animal can add a picture</h6>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Appts -->
+<div class="row">
+    <div class="card col s12">
+        <div class="container">
+            <div class="card-content" style="background-color: grey; color: white;">
+            {% if user.is_authenticated %}
+                {% if appointments %}
+                <h2>Existing Visits</h2>
+                <ul>
+                    {% for appointment in appointments %}
+                        <li>
+                            <br> {{ appointment.user }} <br>
+                            {{ appointment.date }} at {{ appointment.time }}
+                                <form method="post" action="{% url 'delete_appointment' pet.id appointment.id %}">
+                                    {% csrf_token %}
+                                    <br>
+                                    <button type="submit">Delete</button>
+                                </form>
+                        </li>
+                    {% endfor %}
+                </ul>
+        {% endif %}
+        <h2>Schedule A Visit</h2>
+        <form method="post" action="{% url 'schedule_appointment' pet.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+                <button type="submit">Schedule</button>
+        </form>
     {% endif %}
 </div>
-
-<!-- Existing Appts -->
-{% if user.is_authenticated %}
-    {% if appointments %}
-        <h2>Existing Visits</h2>
-        <ul>
-            {% for appointment in appointments %}
-                <li>
-                    <br> {{ appointment.user }} <br>
-                    {{ appointment.date }} at {{ appointment.time }}
-                    <form method="post" action="{% url 'delete_appointment' pet.id appointment.id %}">
-                        {% csrf_token %}
-                        <br>
-                        <button type="submit">Delete</button>
-                    </form>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-    <!-- New Appt Form -->
-    <h2>Schedule A Visit</h2>
-    <form method="post" action="{% url 'schedule_appointment' pet.id %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Schedule</button>
-    </form>
-{% endif %}
-
-{% for photo in pet.photo_set.all %}
-    <img class="responsive-img card-panel" src="{{photo.url}}" alt="Pet Photo">
-{% empty %}
-    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-{% endfor %}
-
-{% if user.id == pet.user.id %}
-<form action="{% url 'add_photo' pet.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
-    {% csrf_token %}
-    <input type="file" name="photo-file">
-    <br><br>
-    <button type="submit" class="btn">Upload Photo</button>
-</form>
-{% else %}
-<h5>
-    Only the owner of the animal can add a picture
-</h5>
-{% endif %}
-
 {% endblock %}
