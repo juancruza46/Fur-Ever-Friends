@@ -3,32 +3,34 @@
     font-weight: bold;
     font-size: medium;
 }
+
 .bold-text2 {
     color: rgb(66, 96, 60);
     font-size: xx-large;
     font-weight: bolder;
     font-family: Swiss 721 Rounded;
 }
+
 .font-color {
     color: rgb(66, 96, 60);
     font-weight: bold;
     font-size: medium;
 }
+
 .font-color2 {
     color: rgb(175, 199, 205);
     font-weight: bold;
     font-size: medium;
 }
+
 body {
     background-color: rgb(175, 199, 205);
+    margin: 10px;
+    text-align: center;
 }
+
 .container1 {
     margin-top: 100px;
-}
-body {
-    margin: 10px;
-    background-color: rgb(175, 199, 205);
-    text-align: center;
 }
 
 h1 {
@@ -38,13 +40,12 @@ h1 {
 
 .card {
     background-color: rgb(127, 172, 110);
-    height: 35vh; 
+    height: 35vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1vh;
 }
-
 
 .card-title {
     color: #815492;
@@ -67,16 +68,70 @@ h1 {
     border: none;
     max-height: 22vh;
     display: flex;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
 }
 
 .pet-img img {
-    object-fit: cover; 
-    max-width: 100%; 
-    max-height: 100%; 
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .log-form {
     background-color: white;
+}
+
+/*---------Home Page ---------- */
+
+.home-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.home-main-content {
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(175, 199, 205);
+}
+
+.home-main-content h1 {
+    color: gray;
+    font-weight: bolder;
+}
+
+.pet-img-container {
+    padding: 1vh;
+    overflow: hidden;
+    border: none;
+    max-height: 22vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    max-height: 100%;
+}
+
+.pet-img img {
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+#image-slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-item {
+    text-align: center;
+}
+
+#image-slider img {
+    max-width: 100%;
+    max-height: auto;
+    object-fit: cover;
 }
