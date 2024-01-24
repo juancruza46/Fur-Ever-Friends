@@ -6,11 +6,12 @@
 
 <div class="row">
 {% for pet in pets %}
-    {% if pet.adopted == True %}
+    {% if pet.adopted == False %}
     {% else %}
     <div class="col s12 m4">
     <div class="card">
         <span class="card-title center-align">{{ pet.name }}</span>
+        <h6>ADOPTED!</h6>
         <p class="center-align black-text">Species: {{ pet.species }} &nbsp;&nbsp;</p>
         {% for photo in pet.photo_set.all %}
             <div class="pet-img">

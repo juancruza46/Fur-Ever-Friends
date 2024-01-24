@@ -1,3 +1,7 @@
+h6 {
+    color: black;
+    font-weight: bolder;
+}
 .bold-text {
     color: rgb(66, 96, 60);
     font-weight: bold;
@@ -79,4 +83,8 @@ h1 {
 
 .log-form {
     background-color: white;
+}
+
+.logout-button:hover {
+    cursor: pointer;
 }
