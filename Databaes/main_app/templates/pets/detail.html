@@ -61,12 +61,15 @@
     {% endif %}
 
     <!-- New Appt Form -->
-    <h2>Schedule A Visit</h2>
-    <form method="post" action="{% url 'schedule_appointment' pet.id %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Schedule</button>
-    </form>
+    {% if user.id == pet.user.id %}
+    {% else %}
+        <h2>Schedule A Visit</h2>
+        <form method="post" action="{% url 'schedule_appointment' pet.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Schedule</button>
+        </form>
+    {% endif %}
 {% endif %}
 
 {% for photo in pet.photo_set.all %}

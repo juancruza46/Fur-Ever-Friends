@@ -1,26 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h1>Pet List</h1>
-{% for pet in pets %}
-  {% if pet.adopted == True %}
-  {% else %}
-  <div class="card">
-    <div class="card-content"></div>
-      <span class="card-title">{{ pet.name }}</span>
-      <p class="right">Species: {{ pet.species }} &nbsp;&nbsp;</p>
-      <a href="/pets/{{pet.id}}">
-            {% for photo in pet.photo_set.all %}
-              <img class="responsive-img card-panel" src="{{photo.url}}" alt="Pet Photo">
-            {% empty %}
-              <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-            {% endfor %}
-          </a>
+
+<h1 class="center-align">Pet List</h1>
+
+<div class="row">
+  {% for pet in pets %}
+    {% if pet.adopted == True %}
+    {% else %}
+    <div class="col s12 m4">
+      <div class="card">
+        <a href="/pets/{{pet.id}}">
+          <span class="card-title center-align">{{ pet.name }}</span>
+          <p class="center-align black-text">Species: {{ pet.species }} &nbsp;&nbsp;</p>
+          {% for photo in pet.photo_set.all %}
+            <div class="pet-img">
+              <img class="responsive-img" src="{{photo.url}}" alt="Pet Photo">
+            </div>
+          {% empty %}
+            <div class="card-panel black-text center-align">No Photos Uploaded</div>
+          {% endfor %}
+        </a>
+      </div>
     </div>
-  </div>
-  {% endif %}
-{% endfor %}
+    {% endif %}
+  {% endfor %}
+</div>
 
 {% endblock %}
-
 <!-- success stories, instead of <3 just flip roles of this page. -->

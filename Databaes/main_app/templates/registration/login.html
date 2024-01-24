@@ -1,16 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<style>
-    body {
-        background-color: rgb(175, 199, 205);
-    }
-    .container1 {
-        margin-top: 100px;
-    }
-</style>
 
 <div class ="container1">
-    <fieldset style="background-color: rgb(242, 172, 120)">
+    <fieldset class="log-form">
         <form method="POST" action="{% url 'login' %}">
             {% csrf_token %}
             {{ form.as_p }}
