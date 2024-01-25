@@ -21,6 +21,10 @@ def pets_index(request):
     pets = Pet.objects.all()
     return render(request, 'pets/index.html', {'pets': pets})
 
+def adopted_pet(request):
+    pets = Pet.objects.all()
+    return render(request, 'pets/adopted.html', {'pets': pets})
+
 def pets_detail(request, pet_id):
     pet = get_object_or_404(Pet, id=pet_id)
     appointments = pet.appointments.all().select_related('pet__user')  
