@@ -2,8 +2,8 @@
 {% block content %}
 
 <h1>Pet Details</h1>
-<div class="row"> 
-    <div class="col s5 push-s1">
+<div class="row" style="background-color: rgb(127, 172, 110);"> 
+    <div class="col s5 push-s1" style="background-color: rgb(127, 172, 110);">
         {% for photo in pet.photo_set.all %}
             <img class="responsive-img card-panel" src="{{photo.url}}" alt="Pet Photo" style="margin-top: 30px">
         {% empty %}
@@ -19,7 +19,7 @@
         </form>
         {% endif %}
     </div>
-    <div class="col s7">
+    <div class="col s7" style="background-color: rgb(127, 172, 110);">
         <span class="card-title" name="value" style="color: black; font-size: 30px;">{{ pet.name }}</span>
         <p>Species: {{ pet.species }}</p>
         <p>Description: {{ pet.description|linebreaks }}</p>

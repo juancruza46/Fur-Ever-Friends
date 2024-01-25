@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
 <h1 class="center-align">Pets List</h1>
 
 <div class="row">
@@ -10,7 +9,7 @@
     {% else %}
     <div class="col s12 m4">
     <div class="card">
-      <a href="/pets/{{pet.id}}">
+        <a href="/pets/{{pet.id}}">
         <span class="card-title center-align">{{ pet.name }}</span>
         <p class="center-align black-text">Species: {{ pet.species }} &nbsp;&nbsp;</p>
         {% for photo in pet.photo_set.all %}
