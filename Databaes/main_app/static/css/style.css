@@ -90,10 +90,6 @@ h5 {
     background-color: white;
 }
 
-<<<<<<< HEAD
-.container {
-    background-color: rgb(127, 172, 110);
-=======
 
 .home-body {
     display: flex;
@@ -150,5 +146,4 @@ h5 {
 .logout-button:hover {
     cursor: pointer;
 
->>>>>>> main
 }
