@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import dj_database_url
 import environ
 import os
 env = environ.Env(
@@ -92,6 +92,7 @@ WSGI_APPLICATION = 'Databaes.wsgi.application'
 
 DATABASES = {
     'default': {
+        'default': dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/<name_of_database>', conn_max_age=600),
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Databaes',
         'USER': env('NEON_USER'),
