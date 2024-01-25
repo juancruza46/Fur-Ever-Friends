@@ -17,9 +17,6 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-# def favorite(request):
-#     return render(request, 'favorite.html')
-
 def pets_index(request):
     pets = Pet.objects.all()
     return render(request, 'pets/index.html', {'pets': pets})
@@ -122,10 +119,3 @@ def adopt_pet(request, pet_id):
         pet.adopted=True
         pet.save()
     return redirect('detail', pet_id=pet_id)
-
-
-# def favorite_pet(request, pet_id):
-#     if request.method == 'POST':
-#         pet = Pet.objects.get(id=pet_id)
-#         pet.save()
-#     return redirect('favorite', pet_id=pet_id)

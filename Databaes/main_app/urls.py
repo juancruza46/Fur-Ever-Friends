@@ -2,8 +2,6 @@ from django.urls import path
 from . import views
 from .views import schedule_appointment
 
-#from .views import logout_view
-
 urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
@@ -17,5 +15,4 @@ urlpatterns = [
     path('pets/<int:pet_id>/add_photo/', views.add_photo, name='add_photo'),
     path('accounts/signup/', views.signup, name='signup'),
     path('pets/<int:pet_id>/adopt', views.adopt_pet, name='adopt_pet'),
-    # path('pets/<int:pet_id>/favorite', views.favorite_pet, name='favorite_pet'),
 ]

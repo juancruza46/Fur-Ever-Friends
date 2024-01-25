@@ -36,6 +36,10 @@ h1 {
     font-weight: bolder;
 }
 
+h5 {
+    color: black;
+}
+
 .card {
     background-color: rgb(127, 172, 110);
     height: 35vh; 
@@ -79,4 +83,8 @@ h1 {
 
 .log-form {
     background-color: white;
+}
+
+.container {
+    background-color: rgb(127, 172, 110);
 }
