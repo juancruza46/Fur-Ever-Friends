@@ -2,8 +2,6 @@ from django.urls import path
 from . import views
 from .views import schedule_appointment
 
-#from .views import logout_view
-
 urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),

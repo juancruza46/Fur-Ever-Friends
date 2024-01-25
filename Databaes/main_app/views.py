@@ -32,13 +32,10 @@ def pets_detail(request, pet_id):
 
     return render(request, 'pets/detail.html', {'pet': pet, 'appointments': appointments, 'form': form})
 
-
-
 class PetCreate(CreateView):
     model = Pet
     fields = ['name', 'species', 'age', 'size', 'gender', 'shots_received', 'description', 'fixed']
     # success_url = '/pets'
-
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -105,7 +102,6 @@ def delete_appointment(request, pet_id, appointment_id):
         appointment.delete()
         
     return redirect('detail', pet_id=pet_id)
-
 
 def signup(request):
     error_message = ''

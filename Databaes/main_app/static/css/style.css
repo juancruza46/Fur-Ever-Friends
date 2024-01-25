@@ -42,6 +42,10 @@ h1 {
     font-weight: bolder;
 }
 
+h5 {
+    color: black;
+}
+
 .card {
     background-color: rgb(127, 172, 110);
     height: 35vh;
@@ -86,6 +90,10 @@ h1 {
     background-color: white;
 }
 
+<<<<<<< HEAD
+.container {
+    background-color: rgb(127, 172, 110);
+=======
 
 .home-body {
     display: flex;
@@ -142,4 +150,5 @@ h1 {
 .logout-button:hover {
     cursor: pointer;
 
+>>>>>>> main
 }
