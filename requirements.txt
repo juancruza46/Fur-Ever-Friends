@@ -3,10 +3,11 @@ blinker==1.4
 boto3==1.34.21
 botocore==1.34.21
 dbus-python==1.2.18
-dj-database-url==2.1.0
 Django==5.0.1
 django-environ==0.11.2
+environ==1.0
 gunicorn==21.2.0
+gyp==0.1
 httplib2==0.20.2
 importlib-metadata==4.6.4
 jeepney==0.7.1
