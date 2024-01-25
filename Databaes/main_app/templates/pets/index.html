@@ -2,7 +2,7 @@
 {% block content %}
 
 
-<h1 class="center-align">Adopted Pets!</h1>
+<h1 class="center-align">Pets List</h1>
 
 <div class="row">
 {% for pet in pets %}
@@ -10,6 +10,7 @@
     {% else %}
     <div class="col s12 m4">
     <div class="card">
+      <a href="/pets/{{pet.id}}">
         <span class="card-title center-align">{{ pet.name }}</span>
         <p class="center-align black-text">Species: {{ pet.species }} &nbsp;&nbsp;</p>
         {% for photo in pet.photo_set.all %}
@@ -19,6 +20,7 @@
         {% empty %}
             <div class="card-panel black-text center-align">No Photos Uploaded</div>
         {% endfor %}
+        </a>
     </div>
     </div>
     {% endif %}
