@@ -1,3 +1,5 @@
+pip install --upgrade pip
+pip install --force-reinstall -U setuptools
 pip install django
 pip install -r requirements.txt
 
