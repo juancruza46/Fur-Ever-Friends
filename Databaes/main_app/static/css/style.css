@@ -1,6 +1,7 @@
-h6 {
+h6, p {
     color: black;
     font-weight: bolder;
+    font-size: 20px;
 }
 .bold-text {
     color: rgb(66, 96, 60);
@@ -89,7 +90,6 @@ h5 {
 .log-form {
     background-color: white;
 }
-
 
 .home-body {
     display: flex;
