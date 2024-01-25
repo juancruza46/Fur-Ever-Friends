@@ -42,3 +42,13 @@ Ready to adopt a new pet into your home. Let this app help you by searching all 
 
 ## Icebox Features
 - Add An API feature
+
+- Screenshots
+![Screenshot 2024-01-25 at 9 43 29 AM](https://github.com/juancruza46/Fur-Ever-Friends/assets/150645094/7214a50d-f66e-471e-b0c6-b378757adcbf)
+
+
+![Screenshot 2024-01-25 at 9 43 58 AM](https://github.com/juancruza46/Fur-Ever-Friends/assets/150645094/256ee969-9afe-4cdf-93fd-c132da195c48)
+
+![Screenshot 2024-01-25 at 9 44 14 AM](https://github.com/juancruza46/Fur-Ever-Friends/assets/150645094/44ba0c62-46cb-4551-8f8a-14ef7269a0a6)
+
+
