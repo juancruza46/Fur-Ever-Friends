@@ -79,12 +79,15 @@
 {% endfor %}
 
 {% if user.id == pet.user.id %}
+    {% if pet.photo_set.all %}
+    {% else %}
 <form action="{% url 'add_photo' pet.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
     {% csrf_token %}
     <input type="file" name="photo-file">
     <br><br>
     <button type="submit" class="btn">Upload Photo</button>
 </form>
+    {% endif %}
 {% else %}
 <h5>
     Only the owner of the animal can add a picture
