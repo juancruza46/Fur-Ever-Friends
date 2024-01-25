@@ -1,6 +1,7 @@
-h6 {
+h6, p {
     color: black;
     font-weight: bolder;
+    font-size: 20px;
 }
 .bold-text {
     color: rgb(66, 96, 60);
@@ -90,11 +91,6 @@ h5 {
     background-color: white;
 }
 
-<<<<<<< HEAD
-.container {
-    background-color: rgb(127, 172, 110);
-=======
-
 .home-body {
     display: flex;
     flex-direction: column;
@@ -150,5 +146,4 @@ h5 {
 .logout-button:hover {
     cursor: pointer;
 
->>>>>>> main
 }
