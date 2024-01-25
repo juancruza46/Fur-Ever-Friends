@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'Databaes.wsgi.application'
 
 DATABASES = {
     'default': {
-        'default': dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/<name_of_database>', conn_max_age=600),
+        'default': dj_database_url.config(default='postgresql://postgres:postgres@localhost:5432/Databaes', conn_max_age=600),
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Databaes',
         'USER': env('NEON_USER'),
